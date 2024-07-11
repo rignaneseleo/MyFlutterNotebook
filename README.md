@@ -19,33 +19,72 @@ flutter create *project_name* --empty
 For every new project, ensure these essential libraries are installed with the latest versions:
 
 ```bash
-# Freezed
+# Lint
+flutter pub add dev:very_good_analysis
+flutter pub add dev:custom_lint
+
+# State management: Riverpod
+flutter pub add flutter_riverpod
+flutter pub add riverpod_annotation
+flutter pub add dev:riverpod_generator
+flutter pub add dev:riverpod_lint
+
+# Data classes: Freezed
 flutter pub add freezed_annotation
 flutter pub add json_annotation
 flutter pub add dev:build_runner
 flutter pub add dev:freezed
 flutter pub add dev:json_serializable
 
-# Riverpod
-flutter pub add riverpod
-flutter pub add riverpod_annotation
-flutter pub add dev:riverpod_generator
-flutter pub add dev:riverpod_lint
-flutter pub add dev:custom_lint
-
-# Router
+# Routing: Go Router
 flutter pub add go_router
 
-# Lint
-flutter pub add dev:flutter_lints
-
-# Theme
+# Theming
 flutter pub add flex_color_scheme
 
 # Others
 flutter pub add shared_preferences
 flutter pub add dev:flutter_launcher_icons
 ```
+
+### Setting Up Linting
+I use the following analysis_options.yaml file for linting:
+
+```bash
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  language:
+    strict-casts: true
+    strict-inference: true
+    strict-raw-types: true
+
+  errors:
+    close_sinks: ignore
+    missing_required_param: error
+    missing_return: error
+    record_literal_one_positional_no_trailing_comma: error
+    collection_methods_unrelated_type: warning
+    unrelated_type_equality_checks: warning
+
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - test/.test_coverage.dart
+    - lib/generated_plugin_registrant.dart
+
+  plugins:
+    - custom_lint
+
+#https://github.com/VeryGoodOpenSource/very_good_analysis/blob/main/lib/analysis_options.5.1.0.yaml
+linter:
+  rules:
+    public_member_api_docs: false
+    prefer_single_quotes: false
+    no_leading_underscores_for_local_identifiers: false
+```
+
+
 
 ### Using FVM
 
