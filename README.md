@@ -112,3 +112,12 @@ To tidy up your project view by hiding unnecessary files, add the following patt
 .module
 .realm.dart
 ```
+
+### Create a Flutter Scope
+When you are searching for a piece of code or a file, you can create a Flutter scope to search only within the Flutter files that matter. To do this, go to `Edit > Find > Find in Path` and click on the `...` button next to the `Scope` field. Then, click on the `+` button and select `Local` to create a new scope. 
+
+Add the following patterns to the scope, replacing *project_name* with the name of your project:
+
+```
+file[*project_name*]:lib//*&&!file:*.g.dart&&!file:*.gr.dart&&!file:*.freezed.dart 
+```
