@@ -48,6 +48,7 @@ sed -i.bak "s/name: $old_name/name: $new_name/" pubspec.yaml && rm pubspec.yaml.
 # Update Android files
 log_info "Updating Android files..."
 sed -i.bak "s/applicationId \".*\"/applicationId \"$new_package_name\"/" android/app/build.gradle && rm android/app/build.gradle.bak || log_error "Failed to update build.gradle"
+sed -i.bak "s/com\.example\.$old_name/$new_package_name/g" android/app/build.gradle && rm android/app/build.gradle.bak || log_error "Failed to update old package name in build.gradle"
 
 # Find and update Kotlin files
 log_info "Updating Kotlin files..."
@@ -68,6 +69,8 @@ find android/app/src/main/kotlin -type d -empty -delete
 # Update AndroidManifest.xml
 log_info "Updating AndroidManifest.xml..."
 sed -i.bak "s/package=\".*\"/package=\"$new_package_name\"/" android/app/src/main/AndroidManifest.xml && rm android/app/src/main/AndroidManifest.xml.bak || log_error "Failed to update AndroidManifest.xml"
+sed -i.bak "s/com\.example\.$old_name/$new_package_name/g" android/app/src/main/AndroidManifest.xml && rm android/app/src/main/AndroidManifest.xml.bak || log_error "Failed to update old package name in AndroidManifest.xml"
+sed -i.bak "s/android:label=\".*\"/android:label=\"$new_display_name\"/" android/app/src/main/AndroidManifest.xml && rm android/app/src/main/AndroidManifest.xml.bak || log_error "Failed to update android:label in AndroidManifest.xml"
 
 # Update iOS files
 log_info "Updating iOS files..."
@@ -110,7 +113,7 @@ sed -i.bak "s/title: '.*'/title: '$new_display_name'/" lib/main.dart && rm lib/m
 
 # Update kAppTitle in consts.dart
 log_info "Updating kAppTitle in consts.dart..."
-sed -i.bak "s/const String kAppTitle = 'Leorigna Template';/const String kAppTitle = '$new_display_name';/" lib/core/consts.dart && rm lib/core/consts.dart.bak || log_error "Failed to update kAppTitle in consts.dart"
+sed -i.bak "s/const String kAppTitle = 'Leorigna Template';/const String kAppTitle = '$new_display_name';/" lib/core/config/consts.dart && rm lib/core/config/consts.dart.bak || log_error "Failed to update kAppTitle in consts.dart"
 
 # Clean and get packages
 log_info "Running flutter clean..."
