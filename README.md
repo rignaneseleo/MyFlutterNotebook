@@ -30,9 +30,6 @@ chmod +x rename_template.sh
 ./rename_template.sh com.org.name "My App Name"
 ```
 
----
-
-Happy coding! 🎉 If you find this notebook helpful, don't forget to star the repo and share it with your fellow Flutter enthusiasts!
 
 ## 🔧 New Flutter Project Setup
 
@@ -174,3 +171,8 @@ Streamline your searches with a custom Flutter scope:
 ```
 file[*project_name*]:lib//*&&!file:*.g.dart&&!file:*.gr.dart&&!file:*.freezed.dart 
 ```
+
+
+---
+
+Happy coding! 🎉 If you find this notebook helpful, don't forget to star the repo and share it with your fellow Flutter enthusiasts!
