@@ -48,7 +48,7 @@ Future<void> _setupBugFender() async {
   if (UniversalPlatform.isMacOS) return;
 
   await FlutterBugfender.init(
-    Env.bugFenderKey,
+    Env.bugfenderKey,
     enableCrashReporting: true, // these are optional, but recommended
     enableUIEventLogging: !kIsWeb, //on web it's not supported
     enableAndroidLogcatLogging: true,
