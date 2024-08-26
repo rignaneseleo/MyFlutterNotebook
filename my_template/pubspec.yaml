@@ -1,0 +1,40 @@
+name: my_template
+description: "A Flutter project template, by @leorigna"
+author: "@leorigna"
+publish_to: 'none'
+version: 0.20240101.0+0
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+
+dependencies:
+  auto_route: 9.2.2
+  envied: ^0.5.4+1
+  flutter:
+    sdk: flutter
+  flutter_bugfender: ^2.3.0
+  flutter_riverpod: ^2.5.1
+  freezed_annotation: ^2.4.4
+  json_annotation: ^4.9.0
+  package_info_plus: ^8.0.2
+  riverpod_annotation: ^2.3.5
+  shared_preferences: ^2.3.2
+  universal_platform: ^1.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^6.0.0
+  custom_lint: ^0.6.5
+  riverpod_generator: ^2.4.3
+  riverpod_lint: ^2.3.13
+  build_runner: ^2.4.12
+  freezed: ^2.5.7
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.4.1
+  envied_generator: ^0.5.4+1
+  auto_route_generator: ^9.0.0
+
+
+flutter:
+  uses-material-design: true
