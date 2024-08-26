@@ -100,6 +100,10 @@ log_info "Performing global search and replace..."
 find . -type f -not -path '*/\.*' -not -name "*.bak" | xargs sed -i.bak "s/$old_name/$new_name/g" && find . -name "*.bak" -type f -delete || log_error "Failed during global search and replace for project name"
 find . -type f -not -path '*/\.*' -not -name "*.bak" | xargs sed -i.bak "s/com\.example\.$old_name/$new_package_name/g" && find . -name "*.bak" -type f -delete || log_error "Failed during global search and replace for package name"
 
+# Update import statements
+log_info "Updating import statements..."
+find . -type f -name "*.dart" | xargs sed -i.bak "s/import 'package:$old_name/import 'package:$new_name/g" && find . -name "*.bak" -type f -delete || log_error "Failed to update import statements"
+
 # Update app title in lib/main.dart
 log_info "Updating app title in lib/main.dart..."
 sed -i.bak "s/title: '.*'/title: '$new_display_name'/" lib/main.dart && rm lib/main.dart.bak || log_error "Failed to update app title in lib/main.dart"
