@@ -36,8 +36,9 @@ flutter pub add dev:build_runner
 flutter pub add dev:freezed
 flutter pub add dev:json_serializable
 
-# Routing: Go Router
+# Routing
 flutter pub add auto_route
+flutter pub add dev:auto_route_generator
 
 # Theming
 flutter pub add flex_color_scheme
