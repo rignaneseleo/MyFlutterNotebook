@@ -13,7 +13,9 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bugfender: ^2.3.0
+  flutter_localization: ^0.2.2
   flutter_riverpod: ^2.5.1
+  flutter_translate: ^4.1.0
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   package_info_plus: ^8.0.2
@@ -38,3 +40,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/
+    - assets/i18n/
+    - assets/images/
+

@@ -81,7 +81,10 @@ flutter pub add envied dev:envied_generator
 flutter pub add dev:flutter_launcher_icons dev:flutter_native_splash
 
 # Misc
-flutter pub add package_info_plus universal_platform shared_preferences permission_handler
+flutter pub add package_info_plus universal_platform shared_preferences permission_handler 
+
+# Translation
+flutter pub add flutter_translate flutter_localization
 
 # Other
 flutter pub add share_plus url_launcher
