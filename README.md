@@ -30,6 +30,10 @@ chmod +x rename_template.sh
 ./rename_template.sh com.org.name "My App Name"
 ```
 
+Once the script is done, you can start your project with:
+ - Install [FVM](https://fvm.app/)
+ - Create the `.env` file with the environment variables in the *root folder* (see .env.example)
+ - Run `fvm dart run  build_runner watch --delete-conflicting-outputs` to generate the code
 
 ## 🔧 New Flutter Project Setup
 
