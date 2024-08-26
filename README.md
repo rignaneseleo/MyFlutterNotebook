@@ -34,6 +34,7 @@ Once the script is done, you can start your project with:
  - Install [FVM](https://fvm.app/)
  - Create the `.env` file with the environment variables in the *root folder* (see .env.example)
  - Run `fvm dart run  build_runner watch --delete-conflicting-outputs` to generate the code
+ - Edit or delete the project README.md file
 
 ## 🔧 New Flutter Project Setup
 
