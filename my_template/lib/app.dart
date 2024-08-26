@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:my_template/shared/providers/test_mode_provider.dart';
 
+import 'core/config/consts.dart';
 import 'core/logging/bugfender/route_observer.dart';
 import 'core/router/app_router.dart';
 import 'core/router/app_router_provider.dart';
@@ -17,7 +18,7 @@ class App extends ConsumerWidget {
     final _appRouter = ref.watch(appRouterProvider);
 
     return MaterialApp.router(
-      title: 'Leorigna Template',
+      title: kAppTitle,
       routerConfig: _appRouter.config(
         /*
         /// This will reevaluate the guards of the current page whenever the auth state changes

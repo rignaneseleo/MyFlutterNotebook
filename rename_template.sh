@@ -108,6 +108,10 @@ find . -type f -name "*.dart" | xargs sed -i.bak "s/import 'package:$old_name/im
 log_info "Updating app title in lib/main.dart..."
 sed -i.bak "s/title: '.*'/title: '$new_display_name'/" lib/main.dart && rm lib/main.dart.bak || log_error "Failed to update app title in lib/main.dart"
 
+# Update kAppTitle in consts.dart
+log_info "Updating kAppTitle in consts.dart..."
+sed -i.bak "s/const String kAppTitle = 'Leorigna Template';/const String kAppTitle = '$new_display_name';/" lib/core/consts.dart && rm lib/core/consts.dart.bak || log_error "Failed to update kAppTitle in consts.dart"
+
 # Clean and get packages
 log_info "Running flutter clean..."
 flutter clean || log_error "Failed to run flutter clean"
