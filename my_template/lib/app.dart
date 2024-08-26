@@ -1,9 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:my_template/shared/providers/test_mode_provider.dart';
-import 'package:my_template/shared/services/localization/localization_provider.dart';
 
 import 'core/config/consts.dart';
 import 'core/logging/bugfender/route_observer.dart';
@@ -18,24 +16,26 @@ class App extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _appRouter = ref.watch(appRouterProvider);
-    final localizationDelegate = ref.watch(localizationDelegateProvider);
 
-    return LocalizationProvider(
-      state: LocalizationProvider.of(context).state,
-      child: MaterialApp.router(
-        title: kAppTitle,
-        routerConfig: _appRouter.config(
-          /*
+    return MaterialApp.router(
+      title: kAppTitle,
+      //locale
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      //routing
+      routerConfig: _appRouter.config(
+        /*
           /// This will reevaluate the guards of the current page whenever the auth state changes
           reevaluateListenable: ReevaluateListenable.stream(
             ref.watch(firebaseAuthApiProvider).authStateChanges(),
           ),
           */
-          navigatorObservers: () => [
-            //bugfender observer
-            BugFenderRouteObserver(),
+        navigatorObservers: () => [
+          //bugfender observer
+          BugFenderRouteObserver(),
 
-            /*FirebaseAnalyticsObserver(
+          /*FirebaseAnalyticsObserver(
                 analytics: FirebaseAnalytics.instance,
                 nameExtractor: (RouteSettings pageSettings) {
                   if (pageSettings.name != null) {
@@ -44,19 +44,10 @@ class App extends ConsumerWidget {
                   }
                   return "unknown";
                 }),*/
-          ],
-        ),
-        // locale
-        localizationsDelegates: [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          localizationDelegate
         ],
-        supportedLocales: localizationDelegate.supportedLocales,
-        locale: localizationDelegate.currentLocale,
-        // debug
-        debugShowCheckedModeBanner: ref.watch(isTestModeProvider),
       ),
+      // debug
+      debugShowCheckedModeBanner: ref.watch(isTestModeProvider),
     );
   }
 }

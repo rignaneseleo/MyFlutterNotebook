@@ -84,7 +84,7 @@ flutter pub add dev:flutter_launcher_icons dev:flutter_native_splash
 flutter pub add package_info_plus universal_platform shared_preferences permission_handler 
 
 # Translation
-flutter pub add flutter_translate flutter_localization
+flutter pub add easy_localization flutter_localization
 
 # Other
 flutter pub add share_plus url_launcher

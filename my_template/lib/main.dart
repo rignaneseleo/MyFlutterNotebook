@@ -1,11 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bugfender/flutter_bugfender.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_translate/flutter_translate.dart';
 import 'package:my_template/shared/providers/package_info_provider.dart';
-import 'package:my_template/shared/services/localization/localization_provider.dart';
-import 'package:my_template/shared/services/localization/translate_preference.dart';
 import 'package:my_template/shared/services/shared_preferences/shared_preferences_api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,17 +16,10 @@ import 'core/logging/log.dart';
 void main() {
   FlutterBugfender.handleUncaughtErrors(() async {
     WidgetsFlutterBinding.ensureInitialized();
+    await EasyLocalization.ensureInitialized();
 
     // Initialize Bugfender, this should be done before any log
     await _setupBugFender();
-
-    final localizationDelegate = await LocalizationDelegate.create(
-      //lang codes: https://api.flutter.dev/flutter/flutter_localizations/flutter_localizations-library.html
-      fallbackLocale: 'en',
-      supportedLocales: ['en'],
-      // https://github.com/Jesway/flutter_translate/wiki/2.-Automatically-saving-&-restoring-the-selected-locale
-      preferences: TranslatePreferences(),
-    );
 
     final riverpodContainer = ProviderContainer(
       // see https://riverpod.dev/docs/concepts/scopes#initialization-of-synchronous-provider-for-async-apis
@@ -41,8 +32,6 @@ void main() {
         packageInfoProvider.overrideWithValue(
           await PackageInfo.fromPlatform(),
         ),
-        // Init Localization
-        localizationDelegateProvider.overrideWithValue(localizationDelegate),
       ],
       observers: [Logger()],
     );
@@ -56,9 +45,15 @@ void main() {
     runApp(
       UncontrolledProviderScope(
         container: riverpodContainer,
-        child: LocalizedApp(
-          localizationDelegate,
-          App(),
+        child: EasyLocalization(
+          supportedLocales: [
+            Locale('en'),
+            //Locale('it', 'IT'),
+          ],
+          path: 'assets/i18n',
+          // <-- change the path of the translation files
+          fallbackLocale: Locale('en'),
+          child: App(),
         ),
       ),
     );
