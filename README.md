@@ -37,18 +37,30 @@ flutter pub add dev:freezed
 flutter pub add dev:json_serializable
 
 # Routing: Go Router
-flutter pub add go_router
+flutter pub add auto_route
 
 # Theming
 flutter pub add flex_color_scheme
 
-# Others
-flutter pub add shared_preferences
+# Logging 
+flutter pub add flutter_bugfender #todo signup and get key
+
+# Envied for environment variables
+flutter pub add envied
+flutter pub add dev:envied_generator
+
+# Icons and Splash Screen generators
 flutter pub add dev:flutter_launcher_icons
 flutter pub add dev:flutter_native_splash
-flutter pub add dev:permission_handler
-flutter pub add dev:share_plus
-flutter pub add dev:url_launcher
+
+# Misc
+flutter pub add universal_platform
+flutter pub add shared_preferences
+flutter pub add permission_handler
+
+# Other
+flutter pub add share_plus
+flutter pub add url_launcher
 ```
 
 ### Setting Up Linting
