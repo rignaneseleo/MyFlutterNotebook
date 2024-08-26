@@ -1,8 +1,21 @@
 # Leorigna's Flutter Notebook
 
-Welcome to my open notebook for Flutter! Here, I'll be compiling notes, code snippets, and useful information as I continue learning and using Flutter.
+Welcome to my open notebook for Flutter! Here, I'll be compiling notes, code
+snippets, and useful information as I continue learning and using Flutter.
 
-*Last update: 11 July 2024*
+*Last update: 26 August 2024*
+
+Index:
+
+- 
+- [New Flutter Project Setup](#new-flutter-project-setup)
+    - [Starting a Project](#starting-a-project)
+    - [Installing Essential Libraries](#installing-essential-libraries)
+    - [Setting Up Linting](#setting-up-linting)
+    - [Disable other platforms](#disable-other-platforms)
+    - [Using FVM](#using-fvm)
+- [Android Studio Tips](#android-studio-tips)
+- [Template Setup](#template-setup)
 
 ## New Flutter Project Setup
 
@@ -16,7 +29,8 @@ flutter create *project_name* --empty
 
 ### Installing Essential Libraries
 
-For every new project, ensure these essential libraries are installed with the latest versions:
+For every new project, ensure these essential libraries are installed with the
+latest versions:
 
 ```bash
 # Lint
@@ -66,6 +80,7 @@ flutter pub add url_launcher
 ```
 
 ### Setting Up Linting
+
 I use the following analysis_options.yaml file for linting:
 
 ```bash
@@ -104,25 +119,33 @@ linter:
 
 ### Disable other platforms
 
-By default, Flutter enables web support. If you are not planning to use web, you can disable it to speed up the build process:
+By default, Flutter enables web support. If you are not planning to use web, you
+can disable it to speed up the build process:
+
 ```bash
 flutter config --no-enable-web
 rm -rf web
 ```
 
-You can also disable other platforms like macOS, Linux, and Windows if you are not planning to use them.
+You can also disable other platforms like macOS, Linux, and Windows if you are
+not planning to use them.
 Run `flutter config` to see the available options.
 
 ### Using FVM
 
-I highly recommend using [FVM](https://fvm.app/) and [Sidekick](https://github.com/fluttertools/sidekick) to manage Flutter versions for each project. This ensures your projects stay futureproof and stick with a defined Flutter version.
+I highly recommend using [FVM](https://fvm.app/)
+and [Sidekick](https://github.com/fluttertools/sidekick) to manage Flutter
+versions for each project. This ensures your projects stay futureproof and stick
+with a defined Flutter version.
 
 For example, to use the stable version of Flutter in a project:
+
 ```bash
 fvm use stable
 ```
 
 But you can also use a specific version of Flutter:
+
 ```bash
 fvm use 3.20.0
 ```
@@ -131,7 +154,8 @@ fvm use 3.20.0
 
 ### Hiding Unnecessary Files
 
-To tidy up your project view by hiding unnecessary files, add the following patterns to `Project > Options > FileNesting`:
+To tidy up your project view by hiding unnecessary files, add the following
+patterns to `Project > Options > FileNesting`:
 
 ```
 .chopper.dart
@@ -147,10 +171,25 @@ To tidy up your project view by hiding unnecessary files, add the following patt
 ```
 
 ### Create a Flutter Scope
-When you are searching for a piece of code or a file, you can create a Flutter scope to search only within the Flutter files that matter. To do this, go to `Edit > Find > Find in Path` and click on the `...` button next to the `Scope` field. Then, click on the `+` button and select `Local` to create a new scope. 
 
-Add the following patterns to the scope, replacing *project_name* with the name of your project:
+When you are searching for a piece of code or a file, you can create a Flutter
+scope to search only within the Flutter files that matter. To do this, go
+to `Edit > Find > Find in Path` and click on the `...` button next to
+the `Scope` field. Then, click on the `+` button and select `Local` to create a
+new scope.
+
+Add the following patterns to the scope, replacing *project_name* with the name
+of your project:
 
 ```
 file[*project_name*]:lib//*&&!file:*.g.dart&&!file:*.gr.dart&&!file:*.freezed.dart 
 ```
+
+## Template Setup
+If you want to use this template, download this repository and run the following commands:
+
+```bash
+chmod +x rename_template.sh
+./rename_template.sh com.org.name "My App Name"
+```
+
