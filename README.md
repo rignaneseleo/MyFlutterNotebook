@@ -54,6 +54,7 @@ flutter pub add dev:flutter_launcher_icons
 flutter pub add dev:flutter_native_splash
 
 # Misc
+flutter pub add package_info_plus
 flutter pub add universal_platform
 flutter pub add shared_preferences
 flutter pub add permission_handler
