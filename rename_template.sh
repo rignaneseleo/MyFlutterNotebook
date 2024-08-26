@@ -100,8 +100,10 @@ fi
 
 # Global search and replace
 log_info "Performing global search and replace..."
-find . -type f -not -path '*/\.*' -not -name "*.bak" | xargs sed -i.bak "s/$old_name/$new_name/g" && find . -name "*.bak" -type f -delete || log_error "Failed during global search and replace for project name"
-find . -type f -not -path '*/\.*' -not -name "*.bak" | xargs sed -i.bak "s/com\.example\.$old_name/$new_package_name/g" && find . -name "*.bak" -type f -delete || log_error "Failed during global search and replace for package name"
+find . -type f -not -path '*/\.*' -not -name "*.bak" -not -name "*.png" -not -name "*.jpg" -not -name "*.jpeg" -not -name "*.gif" | while read file; do
+    perl -i -pe "s/$old_name/$new_name/g" "$file" || log_error "Failed to replace project name in $file"
+    perl -i -pe "s/com\.example\.$old_name/$new_package_name/g" "$file" || log_error "Failed to replace package name in $file"
+done
 
 # Update import statements
 log_info "Updating import statements..."
