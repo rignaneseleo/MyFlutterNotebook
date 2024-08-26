@@ -45,6 +45,10 @@ flutter pub add flex_color_scheme
 # Others
 flutter pub add shared_preferences
 flutter pub add dev:flutter_launcher_icons
+flutter pub add dev:flutter_native_splash
+flutter pub add dev:permission_handler
+flutter pub add dev:share_plus
+flutter pub add dev:url_launcher
 ```
 
 ### Setting Up Linting
@@ -84,14 +88,29 @@ linter:
     no_leading_underscores_for_local_identifiers: false
 ```
 
+### Disable other platforms
 
+By default, Flutter enables web support. If you are not planning to use web, you can disable it to speed up the build process:
+```bash
+flutter config --no-enable-web
+rm -rf web
+```
+
+You can also disable other platforms like macOS, Linux, and Windows if you are not planning to use them.
+Run `flutter config` to see the available options.
 
 ### Using FVM
 
-I highly recommend using [FVM](https://fvm.app/) and [Sidekick](https://github.com/fluttertools/sidekick) to manage Flutter versions for each project. This ensures your projects remain compatible and avoids version conflicts.
+I highly recommend using [FVM](https://fvm.app/) and [Sidekick](https://github.com/fluttertools/sidekick) to manage Flutter versions for each project. This ensures your projects stay futureproof and stick with a defined Flutter version.
 
+For example, to use the stable version of Flutter in a project:
 ```bash
 fvm use stable
+```
+
+But you can also use a specific version of Flutter:
+```bash
+fvm use 3.20.0
 ```
 
 ## Android Studio Tips
