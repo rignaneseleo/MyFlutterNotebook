@@ -6,6 +6,7 @@ Welcome to my open notebook for Flutter! Here, I'll be compiling notes, code sni
 
 ## 📚 Table of Contents
 
+- [My Template Setup](#-template-setup)
 - [New Flutter Project Setup](#-new-flutter-project-setup)
   - [Starting a Project](#starting-a-project)
   - [Installing Essential Libraries](#installing-essential-libraries)
@@ -13,9 +14,25 @@ Welcome to my open notebook for Flutter! Here, I'll be compiling notes, code sni
   - [Disable Other Platforms](#disable-other-platforms)
   - [Using FVM](#using-fvm)
 - [Android Studio Tips](#-android-studio-tips)
-- [Template Setup](#-template-setup)
+
 
 ---
+
+## 🧩 Template Setup
+
+Get started with this template in two easy steps:
+
+1. Download this repository
+2. Run the setup script:
+
+```bash
+chmod +x rename_template.sh
+./rename_template.sh com.org.name "My App Name"
+```
+
+---
+
+Happy coding! 🎉 If you find this notebook helpful, don't forget to star the repo and share it with your fellow Flutter enthusiasts!
 
 ## 🔧 New Flutter Project Setup
 
@@ -157,19 +174,3 @@ Streamline your searches with a custom Flutter scope:
 ```
 file[*project_name*]:lib//*&&!file:*.g.dart&&!file:*.gr.dart&&!file:*.freezed.dart 
 ```
-
-## 🧩 Template Setup
-
-Get started with this template in two easy steps:
-
-1. Download this repository
-2. Run the setup script:
-
-```bash
-chmod +x rename_template.sh
-./rename_template.sh com.org.name "My App Name"
-```
-
----
-
-Happy coding! 🎉 If you find this notebook helpful, don't forget to star the repo and share it with your fellow Flutter enthusiasts!
