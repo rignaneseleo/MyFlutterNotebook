@@ -68,8 +68,8 @@ flutter pub add dev:build_runner dev:freezed dev:json_serializable
 # Routing
 flutter pub add auto_route dev:auto_route_generator
 
-# Theming
-flutter pub add flex_color_scheme
+# Style
+flutter pub add flex_color_scheme google_fonts
 
 # Logging 
 flutter pub add flutter_bugfender #todo signup and get key
@@ -85,6 +85,8 @@ flutter pub add package_info_plus universal_platform shared_preferences permissi
 
 # Translation
 flutter pub add easy_localization flutter_localization
+
+# Style
 
 # Other
 flutter pub add share_plus url_launcher
