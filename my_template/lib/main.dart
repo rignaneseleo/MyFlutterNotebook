@@ -18,6 +18,14 @@ void main() {
     WidgetsFlutterBinding.ensureInitialized();
     await EasyLocalization.ensureInitialized();
 
+    // Set the status bar color to bg
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: AppColors.bg,
+        systemStatusBarContrastEnforced: true,
+      ),
+    );
+
     // Initialize Bugfender, this should be done before any log
     await _setupBugFender();
 
