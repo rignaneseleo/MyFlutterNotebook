@@ -16,7 +16,6 @@ Welcome to my open notebook for Flutter! Here, I'll be compiling notes, code sni
   - [Setting Up FlutterFire](#setting-up-flutterfire)
 - [Android Studio Tips](#-android-studio-tips)
 
-
 ---
 
 ## 🧩 Template Setup
@@ -25,7 +24,6 @@ Get started with this template in two easy steps:
 
 1. Download this repository
 2. Run the setup script:
-
 ```bash
 chmod +x rename_template.sh
 ./rename_template.sh com.org.name "My App Name"
@@ -87,7 +85,8 @@ flutter pub add package_info_plus universal_platform shared_preferences permissi
 # Translation
 flutter pub add easy_localization flutter_localization
 
-# Style
+# Utils
+flutter pub add flutter_gen_runner flutter_svg
 
 # Other
 flutter pub add share_plus url_launcher
@@ -210,7 +209,7 @@ Streamline your searches with a custom Flutter scope:
 file[*project_name*]:lib//*&&!file:*.g.dart&&!file:*.gr.dart&&!file:*.freezed.dart 
 ```
 
-
+---
 ---
 
 Happy coding! 🎉 If you find this notebook helpful, don't forget to star the repo and share it with your fellow Flutter enthusiasts!
