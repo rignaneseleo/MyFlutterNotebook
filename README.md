@@ -13,6 +13,7 @@ Welcome to my open notebook for Flutter! Here, I'll be compiling notes, code sni
   - [Setting Up Linting](#setting-up-linting)
   - [Disable Other Platforms](#disable-other-platforms)
   - [Using FVM](#using-fvm)
+  - [Setting Up FlutterFire](#setting-up-flutterfire)
 - [Android Studio Tips](#-android-studio-tips)
 
 
@@ -154,6 +155,33 @@ fvm use stable
 # or
 fvm use 3.20.0
 ```
+
+### Setting Up FlutterFire
+
+FlutterFire CLI is a command-line tool that helps you set up Firebase in your Flutter projects: https://firebase.flutter.dev/
+
+After installing the FlutterFire CLI, run the following command to set up Firebase in your project:
+
+```bash
+flutterfire configure
+```
+
+This will create a `firebase_options.dart` file in your project containing the Firebase options for the platform you are building for.
+
+In your flutter app main.dart you can simply use:
+
+```dart
+import 'firebase_options.dart';
+
+// ...
+
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
+```
+
+---
+---
 
 ## 🎨 Android Studio Tips
 
