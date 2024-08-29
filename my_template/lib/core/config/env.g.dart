@@ -9,21 +9,21 @@ part of 'env.dart';
 // coverage:ignore-file
 // ignore_for_file: type=lint
 final class _Env {
-  static const List<int> _enviedkeybugFenderKey = <int>[
-    555092590,
-    839760060,
-    1310592602,
+  static const List<int> _enviedkeybugfenderKey = <int>[
+    4010551300,
+    4088780984,
+    1797197770,
   ];
 
-  static const List<int> _envieddatabugFenderKey = <int>[
-    555092502,
-    839760068,
-    1310592546,
+  static const List<int> _envieddatabugfenderKey = <int>[
+    4010551420,
+    4088780992,
+    1797197746,
   ];
 
-  static final String bugFenderKey = String.fromCharCodes(List<int>.generate(
-    _envieddatabugFenderKey.length,
+  static final String bugfenderKey = String.fromCharCodes(List<int>.generate(
+    _envieddatabugfenderKey.length,
     (int i) => i,
     growable: false,
-  ).map((int i) => _envieddatabugFenderKey[i] ^ _enviedkeybugFenderKey[i]));
+  ).map((int i) => _envieddatabugfenderKey[i] ^ _enviedkeybugfenderKey[i]));
 }
