@@ -1,8 +1,12 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bugfender/flutter_bugfender.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_template/shared/providers/device_info_provider.dart';
 import 'package:my_template/shared/providers/package_info_provider.dart';
 import 'package:my_template/shared/services/shared_preferences/shared_preferences_api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -11,12 +15,18 @@ import 'package:universal_platform/universal_platform.dart';
 
 import 'app.dart';
 import 'core/config/env.dart';
+import 'core/config/firebase_options.dart';
 import 'core/logging/log.dart';
+import 'core/theme/colors.dart';
+
 
 void main() {
   FlutterBugfender.handleUncaughtErrors(() async {
     WidgetsFlutterBinding.ensureInitialized();
     await EasyLocalization.ensureInitialized();
+
+    // Initialize Bugfender, this should be done before any log
+    await _setupBugFender();
 
     // Set the status bar color to bg
     SystemChrome.setSystemUIOverlayStyle(
@@ -26,8 +36,9 @@ void main() {
       ),
     );
 
-    // Initialize Bugfender, this should be done before any log
-    await _setupBugFender();
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
     final riverpodContainer = ProviderContainer(
       // see https://riverpod.dev/docs/concepts/scopes#initialization-of-synchronous-provider-for-async-apis
@@ -66,13 +77,13 @@ void main() {
       UncontrolledProviderScope(
         container: riverpodContainer,
         child: EasyLocalization(
-          supportedLocales: [
+          supportedLocales: const [
             Locale('en'),
             //Locale('it', 'IT'),
           ],
           path: 'assets/i18n',
           // <-- change the path of the translation files
-          fallbackLocale: Locale('en'),
+          fallbackLocale: const Locale('en'),
           child: App(),
         ),
       ),
