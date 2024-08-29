@@ -40,6 +40,18 @@ void main() {
         packageInfoProvider.overrideWithValue(
           await PackageInfo.fromPlatform(),
         ),
+        // Init DeviceInfo
+        deviceInfoProvider.overrideWithValue(
+          await switch (UniversalPlatform.value) {
+            UniversalPlatformType.Web => DeviceInfoPlugin().webBrowserInfo,
+            UniversalPlatformType.Android => DeviceInfoPlugin().androidInfo,
+            UniversalPlatformType.IOS => DeviceInfoPlugin().iosInfo,
+            UniversalPlatformType.MacOS => DeviceInfoPlugin().macOsInfo,
+            UniversalPlatformType.Windows => DeviceInfoPlugin().windowsInfo,
+            UniversalPlatformType.Linux => DeviceInfoPlugin().linuxInfo,
+            _ => throw UnimplementedError(),
+          },
+        ),
       ],
       observers: [Logger()],
     );
