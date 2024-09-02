@@ -10,8 +10,9 @@ log_info() {
     echo "INFO: $1"
 }
 
-# Set old_name as a constant
+# Set old_name and old_package_name as constants
 old_name="my_template"
+old_package_name="com.example.my_template"
 
 # Check if all arguments are provided
 if [ "$#" -ne 2 ]; then
@@ -48,18 +49,22 @@ sed -i.bak "s/name: $old_name/name: $new_name/" pubspec.yaml && rm pubspec.yaml.
 # Update Android files
 log_info "Updating Android files..."
 sed -i.bak "s/applicationId \".*\"/applicationId \"$new_package_name\"/" android/app/build.gradle && rm android/app/build.gradle.bak || log_error "Failed to update build.gradle"
-sed -i.bak "s/com\.example\.$old_name/$new_package_name/g" android/app/build.gradle && rm android/app/build.gradle.bak || log_error "Failed to update old package name in build.gradle"
+sed -i.bak "s/$old_package_name/$new_package_name/g" android/app/build.gradle && rm android/app/build.gradle.bak || log_error "Failed to update old package name in build.gradle"
 
 # Find and update Kotlin files
 log_info "Updating Kotlin files..."
 find android/app/src/main/kotlin -type f -name "*.kt" | while read -r file; do
     log_info "Processing Kotlin file: $file"
     sed -i.bak "s/^package .*/package $new_package_name/" "$file" && rm "${file}.bak" || log_error "Failed to update package in $file"
-    new_dir=$(dirname "$file" | sed "s|com/example/$old_name|$(echo $new_package_name | sed 's/\./\//g')|g")
+    new_dir=$(dirname "$file" | sed "s|$(echo $old_package_name | sed 's/\./\//g')|$(echo $new_package_name | sed 's/\./\//g')|g")
     log_info "Creating new directory: $new_dir"
     mkdir -p "$new_dir" || log_error "Failed to create directory $new_dir"
-    log_info "Moving file to new directory"
-    mv "$file" "$new_dir/" || log_error "Failed to move $file to $new_dir"
+    if [ "$file" != "$new_dir/$(basename "$file")" ]; then
+        log_info "Moving file to new directory"
+        mv "$file" "$new_dir/" || log_error "Failed to move $file to $new_dir"
+    else
+        log_info "File $file is already in the correct directory"
+    fi
 done
 
 # Clean up old directories
@@ -69,7 +74,7 @@ find android/app/src/main/kotlin -type d -empty -delete
 # Update AndroidManifest.xml
 log_info "Updating AndroidManifest.xml..."
 sed -i.bak "s/package=\".*\"/package=\"$new_package_name\"/" android/app/src/main/AndroidManifest.xml && rm android/app/src/main/AndroidManifest.xml.bak || log_error "Failed to update AndroidManifest.xml"
-sed -i.bak "s/com\.example\.$old_name/$new_package_name/g" android/app/src/main/AndroidManifest.xml && rm android/app/src/main/AndroidManifest.xml.bak || log_error "Failed to update old package name in AndroidManifest.xml"
+sed -i.bak "s/$old_package_name/$new_package_name/g" android/app/src/main/AndroidManifest.xml && rm android/app/src/main/AndroidManifest.xml.bak || log_error "Failed to update old package name in AndroidManifest.xml"
 sed -i.bak "s/android:label=\".*\"/android:label=\"$new_display_name\"/" android/app/src/main/AndroidManifest.xml && rm android/app/src/main/AndroidManifest.xml.bak || log_error "Failed to update android:label in AndroidManifest.xml"
 
 # Update iOS files
@@ -77,7 +82,7 @@ log_info "Updating iOS files..."
 sed -i.bak "s/PRODUCT_BUNDLE_IDENTIFIER = .*/PRODUCT_BUNDLE_IDENTIFIER = $new_package_name;/" ios/Runner.xcodeproj/project.pbxproj && rm ios/Runner.xcodeproj/project.pbxproj.bak || log_error "Failed to update iOS bundle identifier"
 sed -i.bak "s/PRODUCT_NAME = .*/PRODUCT_NAME = \"$new_display_name\";/" ios/Runner.xcodeproj/project.pbxproj && rm ios/Runner.xcodeproj/project.pbxproj.bak || log_error "Failed to update iOS product name"
 
-if command -v plutil &> /dev/null; then
+if command -v plutil &>/dev/null; then
     plutil -replace CFBundleName -string "$new_display_name" ios/Runner/Info.plist || log_error "Failed to update CFBundleName in Info.plist"
     plutil -replace CFBundleDisplayName -string "$new_display_name" ios/Runner/Info.plist || log_error "Failed to update CFBundleDisplayName in Info.plist"
 else
@@ -89,8 +94,8 @@ if [ -d "macos" ]; then
     log_info "Updating macOS files..."
     sed -i.bak "s/PRODUCT_BUNDLE_IDENTIFIER = .*/PRODUCT_BUNDLE_IDENTIFIER = $new_package_name;/" macos/Runner.xcodeproj/project.pbxproj && rm macos/Runner.xcodeproj/project.pbxproj.bak || log_error "Failed to update macOS bundle identifier"
     sed -i.bak "s/PRODUCT_NAME = .*/PRODUCT_NAME = \"$new_display_name\";/" macos/Runner.xcodeproj/project.pbxproj && rm macos/Runner.xcodeproj/project.pbxproj.bak || log_error "Failed to update macOS product name"
-    
-    if command -v plutil &> /dev/null; then
+
+    if command -v plutil &>/dev/null; then
         plutil -replace CFBundleName -string "$new_display_name" macos/Runner/Info.plist || log_error "Failed to update CFBundleName in macOS Info.plist"
         plutil -replace CFBundleDisplayName -string "$new_display_name" macos/Runner/Info.plist || log_error "Failed to update CFBundleDisplayName in macOS Info.plist"
     else
@@ -102,7 +107,7 @@ fi
 log_info "Performing global search and replace..."
 find . -type f -not -path '*/\.*' -not -name "*.bak" -not -name "*.png" -not -name "*.jpg" -not -name "*.jpeg" -not -name "*.gif" | while read file; do
     perl -i -pe "s/$old_name/$new_name/g" "$file" || log_error "Failed to replace project name in $file"
-    perl -i -pe "s/com\.example\.$old_name/$new_package_name/g" "$file" || log_error "Failed to replace package name in $file"
+    perl -i -pe "s/$old_package_name/$new_package_name/g" "$file" || log_error "Failed to replace package name in $file"
 done
 
 # Update import statements
