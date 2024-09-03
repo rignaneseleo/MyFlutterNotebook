@@ -17,8 +17,6 @@ import 'app.dart';
 import 'core/config/env.dart';
 import 'core/config/firebase_options.dart';
 import 'core/logging/log.dart';
-import 'core/theme/colors.dart';
-
 
 void main() {
   FlutterBugfender.handleUncaughtErrors(() async {
@@ -28,13 +26,8 @@ void main() {
     // Initialize Bugfender, this should be done before any log
     await _setupBugFender();
 
-    // Set the status bar color to bg
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: AppColors.bg,
-        systemStatusBarContrastEnforced: true,
-      ),
-    );
+    // Setting SystemUIOverlay
+    _setupSystemUIOverlay();
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
@@ -89,6 +82,28 @@ void main() {
       ),
     );
   });
+}
+
+void _setupSystemUIOverlay() {
+  //Setting SystemUIOverlay
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      //Status bar color
+      statusBarColor: Colors.black.withOpacity(0.05),
+      systemStatusBarContrastEnforced: true,
+      //Navigation bar color
+      systemNavigationBarColor: Colors.black.withOpacity(0.05),
+      systemNavigationBarDividerColor: Colors.transparent,
+      systemNavigationBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+
+  //Setting SystmeUIMode
+  SystemChrome.setEnabledSystemUIMode(
+    SystemUiMode.edgeToEdge,
+    overlays: [SystemUiOverlay.top],
+  );
 }
 
 Future<void> _setupBugFender() async {
