@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -28,5 +30,12 @@ extension WidgetListExtension on List<Widget> {
   List<Widget> gap(double size) {
     return expand((widget) => [widget, SizedBox.square(dimension: size)])
         .toList();
+  }
+}
+
+// extend Iterable to add random method
+extension IterableExtension<T> on Iterable<T> {
+  T random() {
+    return elementAt(Random().nextInt(length));
   }
 }
