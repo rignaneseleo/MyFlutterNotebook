@@ -8,13 +8,15 @@ environment:
   sdk: ">=3.4.0 <4.0.0"
 
 dependencies:
+  flutter:
+    sdk: flutter
+
+
   firebase_core: 2.15.1
   auto_route: 9.2.2
   device_info_plus: ^10.1.2
   easy_localization: 3.0.7
   envied: 0.5.4+1
-  flutter:
-    sdk: flutter
   flutter_bugfender: 2.3.0
   flutter_localization: 0.2.2
   flutter_riverpod: 2.5.1
@@ -50,7 +52,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
     - assets/i18n/
-    - assets/images/
 

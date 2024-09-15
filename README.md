@@ -30,7 +30,7 @@ chmod +x rename_template.sh
 ```
 
 Once the script is done, you can start your project with:
- - Install [FVM](https://fvm.app/)
+ - Install [FVM](https://fvm.app/) and remember to set the Flutter SDK path to the one inside the FVM folder (eg *path*/flutter_notebook/my_template/.fvm/flutter_sdk)
  - Create the `.env` file with the environment variables in the *root folder* (see .env.example)
  - Run `fvm dart run  build_runner watch --delete-conflicting-outputs` to generate the code
  - Edit or delete the project README.md file
@@ -86,7 +86,7 @@ flutter pub add package_info_plus universal_platform shared_preferences permissi
 flutter pub add easy_localization flutter_localization
 
 # Utils
-flutter pub add flutter_gen_runner flutter_svg
+flutter pub add flutter_gen_runner flutter_svg collection
 
 # Other
 flutter pub add share_plus url_launcher

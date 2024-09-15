@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage();
 
   @override
   Widget build(BuildContext context) {

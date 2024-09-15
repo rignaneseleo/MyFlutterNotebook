@@ -29,9 +29,10 @@ void main() {
     // Setting SystemUIOverlay
     _setupSystemUIOverlay();
 
-    await Firebase.initializeApp(
+    // Initialize Firebase, this should be done before any other Firebase service
+    /*await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
-    );
+    );*/
 
     final riverpodContainer = ProviderContainer(
       // see https://riverpod.dev/docs/concepts/scopes#initialization-of-synchronous-provider-for-async-apis
