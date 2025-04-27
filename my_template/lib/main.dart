@@ -1,22 +1,19 @@
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bugfender/flutter_bugfender.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_template/app.dart';
+import 'package:my_template/core/config/env.dart';
+import 'package:my_template/core/logging/log.dart';
 import 'package:my_template/shared/providers/device_info_provider.dart';
 import 'package:my_template/shared/providers/package_info_provider.dart';
 import 'package:my_template/shared/services/shared_preferences/shared_preferences_api.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:universal_platform/universal_platform.dart';
-
-import 'app.dart';
-import 'core/config/env.dart';
-import 'core/config/firebase_options.dart';
-import 'core/logging/log.dart';
 
 void main() {
   FlutterBugfender.handleUncaughtErrors(() async {
@@ -118,11 +115,9 @@ Future<void> _setupBugFender() async {
 
   await FlutterBugfender.init(
     Env.bugfenderKey,
-    enableCrashReporting: true, // these are optional, but recommended
     enableUIEventLogging: !kIsWeb, //on web it's not supported
     enableAndroidLogcatLogging: true,
-    printToConsole: true,
   );
 
-  Log.generic(">>>>> RUNNING WITH BUGFENDER <<<<<<<<");
+  Log.generic(null, ">>>>> RUNNING WITH BUGFENDER <<<<<<<<");
 }

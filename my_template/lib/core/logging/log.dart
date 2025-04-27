@@ -6,8 +6,8 @@ import 'package:universal_platform/universal_platform.dart';
 class Log {
   static void setup({
     required String? type,
-    required String email,
-    required String uid,
+    required String? email,
+    required String? uid,
   }) {
     if (UniversalPlatform.isMacOS) return;
     FlutterBugfender.setDeviceString("user.type", type ?? "unknown");
@@ -23,36 +23,44 @@ class Log {
     FlutterBugfender.removeDeviceKey("user.id");
   }
 
-  static void info(String message) {
+  static void info(dynamic author, String message) {
     if (UniversalPlatform.isMacOS) return;
 
-    FlutterBugfender.info("$message");
+    FlutterBugfender.info("[${author.runtimeType}] $message");
   }
 
-  static void generic(String message) {
+  static void generic(dynamic author, String message) {
     if (UniversalPlatform.isMacOS) return;
 
-    FlutterBugfender.log("$message");
+    FlutterBugfender.log("[${author.runtimeType}] $message");
   }
 
-  static void error(String message) {
+  static void error(dynamic author, String message, {Object? error}) {
     if (UniversalPlatform.isMacOS) return;
 
-    FlutterBugfender.error("$message");
+    FlutterBugfender.error(
+      "[${author.runtimeType}] $message${error != null ? ": $error" : ""}",
+    );
     //if (kDebugMode) throw Exception(message);
   }
 
-  static void trace(String message) {
+  static void trace(dynamic author, String message) {
     if (UniversalPlatform.isMacOS) return;
 
-    FlutterBugfender.trace(message);
+    FlutterBugfender.trace("[${author.runtimeType}] $message");
     //if (kDebugMode) throw Exception(message);
   }
 
-  static void warn(String message) {
+  static void warn(dynamic author, String message) {
     if (UniversalPlatform.isMacOS) return;
 
-    FlutterBugfender.warn("$message");
+    FlutterBugfender.warn("[${author.runtimeType}] $message");
+  }
+
+  static void debug(dynamic author, String message) {
+    if (UniversalPlatform.isMacOS) return;
+
+    FlutterBugfender.debug("[${author.runtimeType}] $message");
   }
 }
 
@@ -66,12 +74,14 @@ class Logger extends ProviderObserver {
   ) {
     if (kDebugMode) {
       Log.trace(
+        this,
         '''
 {
   "provider": "${provider.name ?? provider.runtimeType}",
   "previousValue": "$previousValue",
   "newValue": "$newValue"
-}''',
+}
+      ''',
       );
     }
   }
