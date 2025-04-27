@@ -1,0 +1,10 @@
+{
+    "dart.flutterSdkPath": ".fvm/flutter_sdk",
+    "makefile.configureOnOpen": false,
+    "[dart]": {
+        "editor.rulers": [
+            80
+        ]
+    },
+    "git.allowNoVerifyCommit": true
+}
