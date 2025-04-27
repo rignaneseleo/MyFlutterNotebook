@@ -29,7 +29,7 @@ extension AxisProperties on Axis {
 extension WidgetListExtension on List<Widget> {
   List<Widget> gap(double size) {
     return expand((widget) => [widget, SizedBox.square(dimension: size)])
-        .toList();
+        .toList()..removeLast();
   }
 }
 
