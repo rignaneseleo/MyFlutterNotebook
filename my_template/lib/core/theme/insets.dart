@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-const double _base = 4.0;
+const double _base = 4;
 
 // Note: you can sum padding: Insets.x3 + Insets.y2
 class Insets {

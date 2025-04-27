@@ -1,17 +1,16 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:my_template/core/config/consts.dart';
+import 'package:my_template/core/logging/bugfender/route_observer.dart';
+import 'package:my_template/core/router/app_router_provider.dart';
 import 'package:my_template/shared/providers/test_mode_provider.dart';
-
-import 'core/config/consts.dart';
-import 'core/logging/bugfender/route_observer.dart';
-import 'core/router/app_router_provider.dart';
 
 // responsive layout: https://codelabs.developers.google.com/codelabs/flutter-animated-responsive-layout#5
 // https://www.youtube.com/watch?v=LeKLGzpsz9I
 
 class App extends ConsumerWidget {
-  App({super.key});
+  const App({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

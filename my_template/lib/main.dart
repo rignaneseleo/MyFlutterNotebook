@@ -75,7 +75,7 @@ void main() {
           path: 'assets/i18n',
           // <-- change the path of the translation files
           fallbackLocale: const Locale('en'),
-          child: App(),
+          child: const App(),
         ),
       ),
     );

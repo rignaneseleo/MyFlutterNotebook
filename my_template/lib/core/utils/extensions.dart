@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 extension Uint8ListExtension on Uint8List {
   String toMbString() {
     //only 2 decimal places
-    return (this.lengthInBytes / 1024 / 1024).toStringAsFixed(2);
+    return (lengthInBytes / 1024 / 1024).toStringAsFixed(2);
   }
 }
 
@@ -29,7 +29,8 @@ extension AxisProperties on Axis {
 extension WidgetListExtension on List<Widget> {
   List<Widget> gap(double size) {
     return expand((widget) => [widget, SizedBox.square(dimension: size)])
-        .toList()..removeLast();
+        .toList()
+      ..removeLast();
   }
 }
 

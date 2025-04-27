@@ -9,7 +9,7 @@ part 'device_info_provider.g.dart';
 BaseDeviceInfo deviceInfo(DeviceInfoRef ref) => throw UnimplementedError();
 
 /*
-      NOTE: BaseDeviceInfo is the superclass for all the Infos, so just use the cast to ge the specific info
+      NOTE: BaseDeviceInfo is the superclass for all the Infos, so just use the cast to get the specific info
 
       final androidInfo = ref.read(deviceInfoProvider) as AndroidDeviceInfo;
       final iosInfo = ref.read(deviceInfoProvider) as IosDeviceInfo;
