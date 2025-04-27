@@ -1,72 +1,39 @@
-/*
-import 'package:auto_route/auto_route.dart';
+/* import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:onda/core/logging/log.dart';
-import 'package:onda/features/auth/photographer/providers/auth_photographer_provider.dart';
-import 'package:onda/features/auth/user/providers/auth_user_provider.dart';
 
-import '../../features/auth/photographer/models/photographer.dart';
 import 'app_router.gr.dart';
 
-class PhAuthGuard extends AutoRouteGuard {
+class PremiumGuard extends AutoRouteGuard {
   final ProviderRef ref;
 
-  PhAuthGuard(this.ref);
+  PremiumGuard(this.ref);
 
   @override
   Future<void> onNavigation(
     NavigationResolver resolver,
     StackRouter router,
   ) async {
-    Log.generic("PhAuthGuard...");
+    // Example: Check if user has premium subscription
+    final isPremium = await _checkPremiumStatus();
 
-    //load the first data of the async provider
-    await ref.read(authPhotographerNotifierProvider.future);
-
-    final ph = ref.read(authPhotographerNotifierProvider).valueOrNull;
-    if (ph != null) {
-      if ([
-        PhotographerStatus.pending,
-        PhotographerStatus.blocked,
-      ].contains(ph.status)) {
-        await ref.read(authPhotographerNotifierProvider.notifier).logout();
-        return resolver.next(false);
-      }
-
-      //proceed
+    if (isPremium) {
+      // User has premium access, proceed with navigation
       resolver.next(true);
     } else {
-      //pause the navigation and redirect to login, then eventually resume
-      await resolver.redirect(PhLoginRoute(
+      // Redirect to subscription page or show a dialog
+      await resolver.redirect(HomeRoute(
         onResult: (success) {
+          // Resume navigation only if subscription was successful
           resolver.next(success);
         },
       ));
     }
-    return;
+  }
+
+  Future<bool> _checkPremiumStatus() async {
+    // Implementation to check premium status
+    // This would typically check a provider or make an API call
+    return false; // Default to non-premium for example
   }
 }
-
-class BuyerAuthGuard extends AutoRouteGuard {
-  final ProviderRef ref;
-
-  BuyerAuthGuard(this.ref);
-
-  @override
-  Future<void> onNavigation(
-    NavigationResolver resolver,
-    StackRouter router,
-  ) async {
-    //load the first data of the async provider
-    await ref.read(authUserNotifierProvider.future);
-
-    final user = ref.read(authUserNotifierProvider).valueOrNull;
-    if (user != null) {
-      //proceed
-      resolver.next(true);
-    } else {
-      resolver.redirect(const SearchRoute());
-    }
-  }
-}
-*/
+ */
